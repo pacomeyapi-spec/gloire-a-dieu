@@ -19,20 +19,31 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
         with:
           gradle-version: '8.4'
 
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+      - name: Move HTML to assets
+        run: |
+          mkdir -p app/src/main/assets
+          HTML=$(find . -maxdepth 1 -name '*.html' | head -1)
+          if [ -n "$HTML" ]; then
+            mv "$HTML" app/src/main/assets/index.html
+            echo "Moved $HTML to assets"
+          else
+            echo "HTML already in assets or not found at root"
+          fi
 
-      - name: Build Release APK
-        run: gradle assembleRelease
+      - name: Build Debug APK
+        run: gradle assembleDebug
 
-      - name: Upload APK artifact
+      - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: Gloire-a-Dieu-APK
-          path: app/build/outputs/apk/release/app-release.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
