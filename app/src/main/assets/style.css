@@ -11,6 +11,7 @@ a{color:inherit;text-decoration:none}
 .hero{background:linear-gradient(160deg,var(--navy),var(--navy2));text-align:center;padding:1.9em 1.1em 1.6em;color:#fff}
 .hero h1{font-size:1.6em;color:var(--gold);letter-spacing:.5px}
 .hero .sub{color:rgba(255,255,255,.62);font-size:.8em;margin-top:.35em;line-height:1.45}
+.hero .org{display:inline-block;margin:.3em 0;font-size:.95em;letter-spacing:.03em;color:rgba(255,255,255,.78)}
 .hero .cnt{display:inline-block;margin-top:.8em;background:var(--gold);color:#fff;font-size:.72em;font-weight:bold;padding:.26em .95em;border-radius:12px}
 .tabs{display:flex;background:var(--navy);border-top:1px solid rgba(184,150,62,.25)}
 .tabs a{flex:1;text-align:center;padding:.65em .3em;font-size:.82em;color:rgba(255,255,255,.66);border-bottom:3px solid transparent}
