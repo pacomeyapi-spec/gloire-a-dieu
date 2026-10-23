@@ -5,6 +5,9 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -47,3 +50,17 @@ jobs:
           name: Gloire-a-Dieu-APK
           path: app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
+
+      # Lien public stable vers la dernière version (utilisé par Yapson AppStore) :
+      # https://github.com/pacomeyapi-spec/gloire-a-dieu/releases/latest/download/GloireADieu.apk
+      - name: Renommer l'APK
+        run: cp app/build/outputs/apk/debug/app-debug.apk GloireADieu.apk
+
+      - name: Publier la dernière version
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v2.3.${{ github.run_number }}
+          name: Gloire à Dieu 2.3.${{ github.run_number }}
+          make_latest: true
+          body: Recueil de 885 chants chrétiens, 100 % hors ligne. Télécharge GloireADieu.apk et installe-le sur Android.
+          files: GloireADieu.apk

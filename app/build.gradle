@@ -10,14 +10,27 @@ android {
         applicationId "com.gloireadieu"
         minSdk 21
         targetSdk 34
-        versionCode 4
-        versionName "2.2"
+        versionCode 5
+        versionName "2.3"
+    }
+
+    // Signature fixe (même clé à chaque compilation) : les mises à jour s'installent par-dessus.
+    signingConfigs {
+        fixe {
+            storeFile file("gloire.keystore")
+            storePassword "gloireadieu"
+            keyAlias "gloire"
+            keyPassword "gloireadieu"
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.fixe
+        }
         release {
             minifyEnabled false
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.fixe
         }
     }
 
